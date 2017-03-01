@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -22,14 +21,11 @@ import net.ghostzer.scoreregate.Models.Regate;
 public class ListeRegatesAdapter extends ArrayAdapter<Regate> {
 
 
-    Button btnEventRegister;
-    Button btnEventMore;
-    TableLayout tblEvent;
-    TextView lblEventBy;
+    TableLayout tblRegate;
 
 
     public ListeRegatesAdapter(Context context, List<Regate> listRegates) {
-        super(context, 0, ListeRegates);
+        super(context, 0, listRegates);
     }
 
 
@@ -38,43 +34,32 @@ public class ListeRegatesAdapter extends ArrayAdapter<Regate> {
 
         // Get the data item for this position
 
-        final Regate lEvent = getItem(position);
+        final Regate lRegate = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
 
         if (convertView == null) {
-
-
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_view, parent, false);
-
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.adapter_regates, parent, false);
         }
 
         // Lookup view for data population
 
-        TextView lblEventTitle = (TextView) convertView.findViewById(R.id.lblEventTitle);
-        TextView lblEventBy = (TextView) convertView.findViewById(R.id.lblEventBy);
+        TextView lblNomRegate = (TextView) convertView.findViewById(R.id.lblNomRegate);
 
-        tblEvent = (TableLayout) convertView.findViewById(R.id.tblEvent);
-        tblEvent.setOnClickListener(new View.OnClickListener() {
+        tblRegate = (TableLayout) convertView.findViewById(R.id.tblRegate);
+        tblRegate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getContext(), DetailsEvent.class);
-                intent.putExtra("event_id","" + lEvent.getId());
+                Intent intent = new Intent(getContext(), DetailsRegate.class);
+                System.out.println("ADAPTER regate id : " + lRegate.getId_regate());
+                intent.putExtra("regate_id", "" + lRegate.getId_regate());
                 getContext().startActivity(intent);
             }
         });
 
-
-
-
-
         // Populate the data into the template view using the data object
-
-
-        lblEventTitle.setText(lEvent.getTitle());
-        lblEventBy.setText("Par " + lEvent.getFirstname() + " " + lEvent.getLastname() );
-
+        lblNomRegate.setText(lRegate.getNom_regate());
 
         // Return the completed view to render on screen
 

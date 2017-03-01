@@ -13,6 +13,7 @@ public class Regate {
     int num_regate;
     Date date_regate;
     int distance_regate;
+    Commissaire commissaire;
 
     public Regate(int id_regate, String nom_regate, int num_regate, Date date_regate, int distance_regate) {
         this.id_regate = id_regate;
@@ -20,6 +21,15 @@ public class Regate {
         this.num_regate = num_regate;
         this.date_regate = date_regate;
         this.distance_regate = distance_regate;
+    }
+
+    public Regate(int id_regate, String nom_regate, int num_regate, Date date_regate, int distance_regate, Commissaire commissaire) {
+        this.id_regate = id_regate;
+        this.nom_regate = nom_regate;
+        this.num_regate = num_regate;
+        this.date_regate = date_regate;
+        this.distance_regate = distance_regate;
+        this.commissaire = commissaire;
     }
 
     public int getId_regate() {

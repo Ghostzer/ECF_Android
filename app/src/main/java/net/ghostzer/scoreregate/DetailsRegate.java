@@ -1,19 +1,16 @@
 package net.ghostzer.scoreregate;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.frateinc.yopbooking2.ApiMethod.FindEventById;
-import com.frateinc.yopbooking2.Models.Event;
+import net.ghostzer.scoreregate.ApiMethod.FindRegateById;
+import net.ghostzer.scoreregate.Models.Regate;
 
-import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -21,46 +18,56 @@ import java.util.concurrent.ExecutionException;
  */
 
 public class DetailsRegate extends AppCompatActivity {
-    TextView txtDetailsPartyName;
-    TextView txtDetailsOrg;
-    TextView txtDetailsDate;
-    TextView txtDetailsaddress;
-    TextView txtDetailsZipcode;
-    TextView txtDetailsComment;
-    String eventId;
-    Date date;
+    String regateId;
+    TextView txtTitreRegate;
+    TextView txtNumRegate;
+    TextView txtDateRegate;
+    TextView txtDistanceRegate;
+    TextView txtComAffect;
+    Button btnVoirResultats;
+//    Date date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.details_event);
+        setContentView(R.layout.activity_details_regate);
 
-        txtDetailsPartyName = (TextView) findViewById(R.id.txtDetailsPartyName);
-        txtDetailsOrg = (TextView) findViewById(R.id.txtDetailsOrg);
-        txtDetailsDate = (TextView) findViewById(R.id.txtDetailsDate);
-        txtDetailsaddress = (TextView) findViewById(R.id.txtDetailsaddress);
-        txtDetailsZipcode = (TextView) findViewById(R.id.txtDetailsZipcode);
-        txtDetailsComment = (TextView) findViewById(R.id.txtDetailsComment);
-        txtDetailsComment.setMovementMethod(new ScrollingMovementMethod());
-        btnDetailsRegister = (FloatingActionButton)findViewById(R.id.btnDetailsRegister);
+        txtTitreRegate = (TextView) findViewById(R.id.txtTitreRegate);
+        txtNumRegate = (TextView) findViewById(R.id.txtNumRegate);
+        txtDateRegate = (TextView) findViewById(R.id.txtDateRegate);
+        txtDistanceRegate = (TextView) findViewById(R.id.txtDistanceRegate);
+        txtComAffect = (TextView) findViewById(R.id.txtComAffect);
 
-        eventId = getIntent().getStringExtra("event_id");
+        regateId = getIntent().getStringExtra("regate_id");
 
         try {
-            FindEventById data = new FindEventById();
-            data.execute(eventId);
-            Event evt = data.get();
+            FindRegateById data = new FindRegateById();
+            data.execute(regateId);
+            Regate rgt = data.get();
 
 //            Date date = convertDate(evt.getDate());
-            txtDetailsPartyName.setText(evt.getTitle());
-            txtDetailsOrg.setText("Par " + evt.getFirstname() + " " + evt.getLastname());
-            txtDetailsDate.setText(evt.getDate() + " à " + evt.getHour() + " h.");
-            txtDetailsaddress.setText(evt.getaddress());
-            txtDetailsZipcode.setText(String.valueOf(evt.getZipcode() + " " + evt.getCity()));
-            txtDetailsComment.setText(evt.getComment());
+            System.out.println("DETAILS regateId= " + regateId);
 
-            Log.i("DATEFORMATEE", String.valueOf(date));
-            Log.i("EVTDATE", String.valueOf(evt.getDate()));
+            txtTitreRegate.setText(rgt.getNom_regate());
+            txtNumRegate.setText(String.valueOf("N° " + rgt.getNum_regate()));
+            txtDateRegate.setText(String.valueOf(rgt.getDate_regate()));
+            txtDistanceRegate.setText(String.valueOf(rgt.getDistance_regate()));
+//            txtComAffect.setText(rgt.get);
+
+
+//            Log.i("DATEFORMATEE", String.valueOf(date));
+//            Log.i("EVTDATE", String.valueOf(rgt.getDate()));
+
+
+            final Button btnVoirResultats = (Button) findViewById(R.id.btnVoirResultats);
+            btnVoirResultats.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+
+                    Intent i = new Intent(getApplicationContext(), ListeScoreRegate.class);
+                    i.putExtra("regate_id", regateId);
+                    startActivity(i);
+                }
+            });
 
 
         } catch (InterruptedException e) {
@@ -68,20 +75,7 @@ public class DetailsRegate extends AppCompatActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        System.out.println("eventId= " + eventId);
 
-        // Bouton à voir, fait planter =>
-
-//        btnDetailsRegister = (FloatingActionButton) findViewById(R.id.btnDetailsRegister);
-//        btnDetailsRegister.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(DetailsEvent.this, RegisterEvent.class);
-//                intent.putExtra("event_id", "" + eventId);
-//                DetailsEvent.this.startActivity(intent);
-//            }
-//        });
     }
 
 

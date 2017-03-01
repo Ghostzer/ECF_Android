@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import net.ghostzer.scoreregate.Config.ConfigApi;
 import net.ghostzer.scoreregate.Models.Regate;
+import net.ghostzer.scoreregate.Models.Score;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -24,20 +25,20 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by Afpa on 28/02/2017.
+ * Created by Afpa on 01/03/2017.
  */
 
-public class FindRegates extends AsyncTask<String, Void, List<Regate>> {
+public class FindScoreByRegate extends AsyncTask<String, Void, List<Score>> {
 
-    private final String link = ConfigApi.findevent;
+    private final String link = ConfigApi.resultatsbyregate;
 
 
     @Override
-    protected List<Regate> doInBackground(String... params) {
+    protected List<Score> doInBackground(String... params) {
         StringBuilder sb = new StringBuilder();
         HttpURLConnection urlConnection;
 
-        List<Regate> regates = new ArrayList<>();
+        List<Score> scores = new ArrayList<>();
 
         try {
             URL url = new URL(link);
@@ -49,7 +50,7 @@ public class FindRegates extends AsyncTask<String, Void, List<Regate>> {
             urlConnection.setRequestProperty("Accept", "application/json");
             urlConnection.connect();
             if (urlConnection.getResponseCode() == HttpsURLConnection.HTTP_OK) {
-                System.out.println("OK FIND EVENT");
+//                System.out.println("OK FIND EVENT");
 
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -70,24 +71,23 @@ public class FindRegates extends AsyncTask<String, Void, List<Regate>> {
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                int id_regate = jsonObject.getInt("id_regate");
-                String nom_regate = jsonObject.getString("nom_regate");
-                int num_regate = jsonObject.getInt("num_regate");
-                String date_regate = jsonObject.getString("date_regate");
-                int distance_regate = jsonObject.getInt("distance_regate");
+                int id_voilier = jsonObject.getInt("id_voilier");
+                String nom_voilier = jsonObject.getString("nom_voilier");
+                String num_voile = jsonObject.getString("num_voile");
+                int place = jsonObject.getInt("place");
+                int tps_reel = jsonObject.getInt("tps_reel");
+                int tps_compense = jsonObject.getInt("tps_compense");
 
-                Date dateRegate = convertDate(date_regate);
+                Score sco = new Score(id_voilier, nom_voilier, num_voile, place, tps_reel, tps_compense);
 
-                Regate rgt = new Regate(id_regate, nom_regate, num_regate, dateRegate, distance_regate);
-
-                regates.add(rgt);
+                scores.add(sco);
 
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return regates;
+        return scores;
 
     }
 
