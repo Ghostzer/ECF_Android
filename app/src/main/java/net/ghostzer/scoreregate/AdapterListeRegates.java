@@ -18,13 +18,13 @@ import net.ghostzer.scoreregate.Models.Regate;
  * Created by Afpa on 28/02/2017.
  */
 
-public class ListeRegatesAdapter extends ArrayAdapter<Regate> {
+public class AdapterListeRegates extends ArrayAdapter<Regate> {
 
 
     TableLayout tblRegate;
 
 
-    public ListeRegatesAdapter(Context context, List<Regate> listRegates) {
+    public AdapterListeRegates(Context context, List<Regate> listRegates) {
         super(context, 0, listRegates);
     }
 

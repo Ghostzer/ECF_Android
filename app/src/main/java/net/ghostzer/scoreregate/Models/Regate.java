@@ -13,7 +13,18 @@ public class Regate {
     int num_regate;
     Date date_regate;
     int distance_regate;
-    Commissaire commissaire;
+    String nom_commissaire;
+    String prenom_commissaire;
+
+    public Regate(int id_regate, String nom_regate, int num_regate, Date date_regate, int distance_regate, String nom_commissaire, String prenom_commissaire) {
+        this.id_regate = id_regate;
+        this.nom_regate = nom_regate;
+        this.num_regate = num_regate;
+        this.date_regate = date_regate;
+        this.distance_regate = distance_regate;
+        this.nom_commissaire = nom_commissaire;
+        this.prenom_commissaire = prenom_commissaire;
+    }
 
     public Regate(int id_regate, String nom_regate, int num_regate, Date date_regate, int distance_regate) {
         this.id_regate = id_regate;
@@ -21,15 +32,6 @@ public class Regate {
         this.num_regate = num_regate;
         this.date_regate = date_regate;
         this.distance_regate = distance_regate;
-    }
-
-    public Regate(int id_regate, String nom_regate, int num_regate, Date date_regate, int distance_regate, Commissaire commissaire) {
-        this.id_regate = id_regate;
-        this.nom_regate = nom_regate;
-        this.num_regate = num_regate;
-        this.date_regate = date_regate;
-        this.distance_regate = distance_regate;
-        this.commissaire = commissaire;
     }
 
     public int getId_regate() {
@@ -70,6 +72,22 @@ public class Regate {
 
     public void setDistance_regate(int distance_regate) {
         this.distance_regate = distance_regate;
+    }
+
+    public String getNom_commissaire() {
+        return nom_commissaire;
+    }
+
+    public void setNom_commissaire(String nom_commissaire) {
+        this.nom_commissaire = nom_commissaire;
+    }
+
+    public String getPrenom_commissaire() {
+        return prenom_commissaire;
+    }
+
+    public void setPrenom_commissaire(String prenom_commissaire) {
+        this.prenom_commissaire = prenom_commissaire;
     }
 
     @Override

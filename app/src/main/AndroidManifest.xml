@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailsRegate"/>
-        <activity android:name=".ListeScoreRegate"/>
+        <activity android:name=".ListeScoreVoiliers"/>
     </application>
 
 </manifest>

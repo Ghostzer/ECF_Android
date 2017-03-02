@@ -6,16 +6,17 @@ import android.widget.ListView;
 import java.util.List;
 import net.ghostzer.scoreregate.ApiMethod.FindScoreByRegate;
 import net.ghostzer.scoreregate.Models.Score;
-import java.util.ArrayList;
+
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Afpa on 01/03/2017.
  */
 
-public class ListeScoreRegate extends AppCompatActivity {
-    List<Score> scores = new ArrayList<>();
+public class ListeScoreVoiliers extends AppCompatActivity {
+//    List<Score> scores = new ArrayList<>();
 
+        List<Score> scores;
 
 
     @Override
@@ -23,18 +24,17 @@ public class ListeScoreRegate extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liste_score_regate);
 
-        String id_voilier = getIntent().getExtras().getString("regate_id");
+        String id_regate = getIntent().getExtras().getString("regate_id");
 
-        System.out.print("LISTESCOREREGATE : " + id_voilier);
+        System.out.print("LISTESCOREREGATE : " + id_regate);
 
-        List<Score> scores = null;
         try {
 
             FindScoreByRegate data = new FindScoreByRegate();
-            data.execute(id_voilier);
-            scores = (List<Score>) data.get();
+            data.execute(id_regate);
+            scores = data.get();
             ListView listView = (ListView) findViewById(R.id.listViewScore);
-            final ListeScoreRegateAdapter adapter = new ListeScoreRegateAdapter(this, scores);
+            final AdapterListeScoreVoilier adapter = new AdapterListeScoreVoilier(this, scores);
             listView.setAdapter(adapter);
 
 

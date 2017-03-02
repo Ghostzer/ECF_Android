@@ -35,13 +35,13 @@ public class FindScoreByRegate extends AsyncTask<String, Void, List<Score>> {
 
     @Override
     protected List<Score> doInBackground(String... params) {
+        List<Score> scores = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         HttpURLConnection urlConnection;
 
-        List<Score> scores = new ArrayList<>();
 
         try {
-            URL url = new URL(link);
+            URL url = new URL(link + params[0]);
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setReadTimeout(9999);
             urlConnection.setConnectTimeout(9999);
@@ -103,5 +103,7 @@ public class FindScoreByRegate extends AsyncTask<String, Void, List<Score>> {
 
         return convertedDate;
     }
+
+
 }
 

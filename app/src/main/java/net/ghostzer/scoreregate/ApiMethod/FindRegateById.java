@@ -69,12 +69,13 @@ public class FindRegateById extends AsyncTask<String, Void, Regate> {
             int num_regate = jsonObject.getInt("num_regate");
             String date_regate = jsonObject.getString("date_regate");
             int distance_regate = jsonObject.getInt("distance_regate");
-            Object commissaire  = jsonObject.getString("nom_personne");
-//            String prenom_commissaire = jsonObject.getString("prenom_personne");
+            String nom_commissaire = jsonObject.getString("nom_personne");
+            String prenom_commissaire = jsonObject.getString("prenom_personne");
+
 
             Date dateRegate = convertDate(date_regate);
 
-            rgt = new Regate(id_regate, nom_regate, num_regate, dateRegate, distance_regate);
+            rgt = new Regate(id_regate, nom_regate, num_regate, dateRegate, distance_regate, nom_commissaire, prenom_commissaire);
 
 
 

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             data.execute();
             regates = data.get();
             ListView listView = (ListView) findViewById(R.id.listViewRegates);
-            final ListeRegatesAdapter adapter = new ListeRegatesAdapter(this, regates);
+            final AdapterListeRegates adapter = new AdapterListeRegates(this, regates);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import net.ghostzer.scoreregate.ApiMethod.FindRegateById;
 import net.ghostzer.scoreregate.Models.Regate;
 
+import java.text.SimpleDateFormat;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -48,11 +49,11 @@ public class DetailsRegate extends AppCompatActivity {
 //            Date date = convertDate(evt.getDate());
             System.out.println("DETAILS regateId= " + regateId);
 
-            txtTitreRegate.setText(rgt.getNom_regate());
+            txtTitreRegate.setText("Régate " + rgt.getNom_regate());
             txtNumRegate.setText(String.valueOf("N° " + rgt.getNum_regate()));
-            txtDateRegate.setText(String.valueOf(rgt.getDate_regate()));
-            txtDistanceRegate.setText(String.valueOf(rgt.getDistance_regate()));
-//            txtComAffect.setText(rgt.get);
+            txtDateRegate.setText(String.valueOf(laDateDuJour));
+            txtDistanceRegate.setText(String.valueOf(rgt.getDistance_regate() + " miles"));
+            txtComAffect.setText("M. " + rgt.getNom_commissaire() + " " + rgt.getPrenom_commissaire());
 
 
 //            Log.i("DATEFORMATEE", String.valueOf(date));
@@ -63,7 +64,7 @@ public class DetailsRegate extends AppCompatActivity {
             btnVoirResultats.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
 
-                    Intent i = new Intent(getApplicationContext(), ListeScoreRegate.class);
+                    Intent i = new Intent(getApplicationContext(), ListeScoreVoiliers.class);
                     i.putExtra("regate_id", regateId);
                     startActivity(i);
                 }
@@ -77,6 +78,9 @@ public class DetailsRegate extends AppCompatActivity {
         }
 
     }
+
+    SimpleDateFormat sdf = new SimpleDateFormat("d/M/y");
+    String laDateDuJour = sdf.format(new java.util.Date());
 
 
 //    private static Date convertDate(Date date) {
