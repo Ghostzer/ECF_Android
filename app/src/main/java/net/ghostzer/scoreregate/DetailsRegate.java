@@ -12,6 +12,9 @@ import net.ghostzer.scoreregate.ApiMethod.FindRegateById;
 import net.ghostzer.scoreregate.Models.Regate;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -49,15 +52,14 @@ public class DetailsRegate extends AppCompatActivity {
 //            Date date = convertDate(evt.getDate());
             System.out.println("DETAILS regateId= " + regateId);
 
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String laDate = sdf.format(rgt.getDate_regate());
+
             txtTitreRegate.setText("Régate " + rgt.getNom_regate());
             txtNumRegate.setText(String.valueOf("N° " + rgt.getNum_regate()));
-            txtDateRegate.setText(String.valueOf(laDateDuJour));
+            txtDateRegate.setText(String.valueOf(laDate));
             txtDistanceRegate.setText(String.valueOf(rgt.getDistance_regate() + " miles"));
             txtComAffect.setText("M. " + rgt.getNom_commissaire() + " " + rgt.getPrenom_commissaire());
-
-
-//            Log.i("DATEFORMATEE", String.valueOf(date));
-//            Log.i("EVTDATE", String.valueOf(rgt.getDate()));
 
 
             final Button btnVoirResultats = (Button) findViewById(R.id.btnVoirResultats);
@@ -78,9 +80,6 @@ public class DetailsRegate extends AppCompatActivity {
         }
 
     }
-
-    SimpleDateFormat sdf = new SimpleDateFormat("d/M/y");
-    String laDateDuJour = sdf.format(new java.util.Date());
 
 
 //    private static Date convertDate(Date date) {
