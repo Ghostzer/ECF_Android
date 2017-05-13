@@ -39,7 +39,7 @@ INNER JOIN commissaire com ON reg.id_commissaire=com.id_commissaire INNER JOIN p
 	
 	//get scores by regate
 	  $app->get('/resultatsbyregate/[{id}]', function ($request, $response, $args) {
-         $sth = $this->db->prepare("SELECT * FROM regate reg INNER JOIN participer par ON reg.id_regate=par.id_regate INNER JOIN Voilier voi ON par.id_voilier=voi.id_voilier WHERE reg.id_regate=:id ORDER BY place ASC");
+         $sth = $this->db->prepare("SELECT * FROM regate reg INNER JOIN participer par ON reg.id_regate=par.id_regate INNER JOIN voilier voi ON par.id_voilier=voi.id_voilier WHERE reg.id_regate=:id ORDER BY place ASC");
 		 $sth->bindParam("id", $args['id']);
       $sth->execute();
       $regates = $sth->fetchAll();

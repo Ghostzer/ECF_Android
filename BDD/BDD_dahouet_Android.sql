@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Ven 03 Mars 2017 à 08:39
--- Version du serveur :  5.7.14
--- Version de PHP :  5.6.25
+-- Host: localhost
+-- Generation Time: May 13, 2017 at 02:51 PM
+-- Server version: 5.7.18-0ubuntu0.16.04.1
+-- PHP Version: 7.0.15-0ubuntu0.16.04.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,12 +17,12 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `dahouet`
+-- Database: `dahouet`
 --
 
 DELIMITER $$
 --
--- Procédures
+-- Procedures
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `DistanceMoyenneSaison` (IN `p_saison` INT)  BEGIN
 SELECT AVG(distance_regate) AS DistanceMoyenne, c.saison AS Saison FROM Regate r
@@ -48,7 +48,7 @@ WHERE r.num_regate = p_regate AND v.num_voile = p_voilier;
 END$$
 
 --
--- Fonctions
+-- Functions
 --
 CREATE DEFINER=`root`@`localhost` FUNCTION `CodeGen` (`v_id_regate` INT) RETURNS VARCHAR(11) CHARSET latin1 BEGIN
 
@@ -71,7 +71,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `challenge`
+-- Table structure for table `challenge`
 --
 
 CREATE TABLE `challenge` (
@@ -83,7 +83,7 @@ CREATE TABLE `challenge` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `challenge`
+-- Dumping data for table `challenge`
 --
 
 INSERT INTO `challenge` (`id_challenge`, `code_challenge`, `saison`, `debut_challenge`, `fin_challenge`) VALUES
@@ -93,7 +93,7 @@ INSERT INTO `challenge` (`id_challenge`, `code_challenge`, `saison`, `debut_chal
 -- --------------------------------------------------------
 
 --
--- Structure de la table `classe`
+-- Table structure for table `classe`
 --
 
 CREATE TABLE `classe` (
@@ -104,7 +104,7 @@ CREATE TABLE `classe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `classe`
+-- Dumping data for table `classe`
 --
 
 INSERT INTO `classe` (`id_classe`, `nom_classe`, `coef`, `id_serie`) VALUES
@@ -123,7 +123,7 @@ INSERT INTO `classe` (`id_classe`, `nom_classe`, `coef`, `id_serie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commissaire`
+-- Table structure for table `commissaire`
 --
 
 CREATE TABLE `commissaire` (
@@ -133,7 +133,7 @@ CREATE TABLE `commissaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `commissaire`
+-- Dumping data for table `commissaire`
 --
 
 INSERT INTO `commissaire` (`id_commissaire`, `comite`, `id_personne`) VALUES
@@ -145,7 +145,7 @@ INSERT INTO `commissaire` (`id_commissaire`, `comite`, `id_personne`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `concurrent`
+-- Table structure for table `concurrent`
 --
 
 CREATE TABLE `concurrent` (
@@ -155,7 +155,7 @@ CREATE TABLE `concurrent` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `concurrent`
+-- Dumping data for table `concurrent`
 --
 
 INSERT INTO `concurrent` (`id_concurrent`, `id_personne`, `id_voilier`) VALUES
@@ -176,7 +176,7 @@ INSERT INTO `concurrent` (`id_concurrent`, `id_personne`, `id_voilier`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participer`
+-- Table structure for table `participer`
 --
 
 CREATE TABLE `participer` (
@@ -188,7 +188,7 @@ CREATE TABLE `participer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `participer`
+-- Dumping data for table `participer`
 --
 
 INSERT INTO `participer` (`tps_reel`, `tps_compense`, `place`, `id_voilier`, `id_regate`) VALUES
@@ -201,7 +201,7 @@ INSERT INTO `participer` (`tps_reel`, `tps_compense`, `place`, `id_voilier`, `id
 (7254, 686, 2, 8, 55);
 
 --
--- Déclencheurs `participer`
+-- Triggers `participer`
 --
 DELIMITER $$
 CREATE TRIGGER `verif_place` BEFORE INSERT ON `participer` FOR EACH ROW BEGIN
@@ -222,7 +222,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `personne`
+-- Table structure for table `personne`
 --
 
 CREATE TABLE `personne` (
@@ -236,7 +236,7 @@ CREATE TABLE `personne` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `personne`
+-- Dumping data for table `personne`
 --
 
 INSERT INTO `personne` (`id_personne`, `nom_personne`, `prenom_personne`, `email_personne`, `num_licence`, `annee_licence`, `nom_club`) VALUES
@@ -264,7 +264,7 @@ INSERT INTO `personne` (`id_personne`, `nom_personne`, `prenom_personne`, `email
 -- --------------------------------------------------------
 
 --
--- Structure de la table `proprietaire`
+-- Table structure for table `proprietaire`
 --
 
 CREATE TABLE `proprietaire` (
@@ -273,7 +273,7 @@ CREATE TABLE `proprietaire` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `proprietaire`
+-- Dumping data for table `proprietaire`
 --
 
 INSERT INTO `proprietaire` (`id_proprietaire`, `id_personne`) VALUES
@@ -289,7 +289,7 @@ INSERT INTO `proprietaire` (`id_proprietaire`, `id_personne`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `regate`
+-- Table structure for table `regate`
 --
 
 CREATE TABLE `regate` (
@@ -303,7 +303,7 @@ CREATE TABLE `regate` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `regate`
+-- Dumping data for table `regate`
 --
 
 INSERT INTO `regate` (`id_regate`, `nom_regate`, `num_regate`, `date_regate`, `distance_regate`, `id_challenge`, `id_commissaire`) VALUES
@@ -331,7 +331,7 @@ INSERT INTO `regate` (`id_regate`, `nom_regate`, `num_regate`, `date_regate`, `d
 (68, 'La Satisfaction', 9993, '2017-07-19', 1478, 2, 4);
 
 --
--- Déclencheurs `regate`
+-- Triggers `regate`
 --
 DELIMITER $$
 CREATE TRIGGER `verif_date_challenge` BEFORE INSERT ON `regate` FOR EACH ROW BEGIN
@@ -364,7 +364,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `serie`
+-- Table structure for table `serie`
 --
 
 CREATE TABLE `serie` (
@@ -373,7 +373,7 @@ CREATE TABLE `serie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `serie`
+-- Dumping data for table `serie`
 --
 
 INSERT INTO `serie` (`id_serie`, `nom_serie`) VALUES
@@ -383,7 +383,7 @@ INSERT INTO `serie` (`id_serie`, `nom_serie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `skipper`
+-- Table structure for table `skipper`
 --
 
 CREATE TABLE `skipper` (
@@ -394,7 +394,7 @@ CREATE TABLE `skipper` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `skipper`
+-- Dumping data for table `skipper`
 --
 
 INSERT INTO `skipper` (`id_skipper`, `num_skipper`, `id_voilier`, `id_personne`) VALUES
@@ -405,7 +405,7 @@ INSERT INTO `skipper` (`id_skipper`, `num_skipper`, `id_voilier`, `id_personne`)
 -- --------------------------------------------------------
 
 --
--- Structure de la table `voilier`
+-- Table structure for table `voilier`
 --
 
 CREATE TABLE `voilier` (
@@ -417,7 +417,7 @@ CREATE TABLE `voilier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `voilier`
+-- Dumping data for table `voilier`
 --
 
 INSERT INTO `voilier` (`id_voilier`, `nom_voilier`, `num_voile`, `id_proprietaire`, `id_classe`) VALUES
@@ -432,31 +432,31 @@ INSERT INTO `voilier` (`id_voilier`, `nom_voilier`, `num_voile`, `id_proprietair
 (9, 'PHP', 207, 1, 1);
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `challenge`
+-- Indexes for table `challenge`
 --
 ALTER TABLE `challenge`
   ADD PRIMARY KEY (`id_challenge`);
 
 --
--- Index pour la table `classe`
+-- Indexes for table `classe`
 --
 ALTER TABLE `classe`
   ADD PRIMARY KEY (`id_classe`),
   ADD KEY `id_serie` (`id_serie`);
 
 --
--- Index pour la table `commissaire`
+-- Indexes for table `commissaire`
 --
 ALTER TABLE `commissaire`
   ADD PRIMARY KEY (`id_commissaire`),
   ADD KEY `FK_Commissaire_id_personne` (`id_personne`);
 
 --
--- Index pour la table `concurrent`
+-- Indexes for table `concurrent`
 --
 ALTER TABLE `concurrent`
   ADD PRIMARY KEY (`id_concurrent`),
@@ -464,27 +464,27 @@ ALTER TABLE `concurrent`
   ADD KEY `FK_Concurrent_id_voilier` (`id_voilier`);
 
 --
--- Index pour la table `participer`
+-- Indexes for table `participer`
 --
 ALTER TABLE `participer`
   ADD PRIMARY KEY (`id_voilier`,`id_regate`),
   ADD KEY `FK_PARTICIPER_id_regate` (`id_regate`);
 
 --
--- Index pour la table `personne`
+-- Indexes for table `personne`
 --
 ALTER TABLE `personne`
   ADD PRIMARY KEY (`id_personne`);
 
 --
--- Index pour la table `proprietaire`
+-- Indexes for table `proprietaire`
 --
 ALTER TABLE `proprietaire`
   ADD PRIMARY KEY (`id_proprietaire`),
   ADD KEY `FK_Proprietaire_id_personne` (`id_personne`);
 
 --
--- Index pour la table `regate`
+-- Indexes for table `regate`
 --
 ALTER TABLE `regate`
   ADD PRIMARY KEY (`id_regate`),
@@ -492,13 +492,13 @@ ALTER TABLE `regate`
   ADD KEY `FK_Regate_id_commissaire` (`id_commissaire`);
 
 --
--- Index pour la table `serie`
+-- Indexes for table `serie`
 --
 ALTER TABLE `serie`
   ADD PRIMARY KEY (`id_serie`);
 
 --
--- Index pour la table `skipper`
+-- Indexes for table `skipper`
 --
 ALTER TABLE `skipper`
   ADD PRIMARY KEY (`id_skipper`),
@@ -506,7 +506,7 @@ ALTER TABLE `skipper`
   ADD KEY `FK_Skipper_id_personne` (`id_personne`);
 
 --
--- Index pour la table `voilier`
+-- Indexes for table `voilier`
 --
 ALTER TABLE `voilier`
   ADD PRIMARY KEY (`id_voilier`),
@@ -514,111 +514,111 @@ ALTER TABLE `voilier`
   ADD KEY `FK_Voilier_id_serie` (`id_classe`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `challenge`
+-- AUTO_INCREMENT for table `challenge`
 --
 ALTER TABLE `challenge`
   MODIFY `id_challenge` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT pour la table `classe`
+-- AUTO_INCREMENT for table `classe`
 --
 ALTER TABLE `classe`
   MODIFY `id_classe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
--- AUTO_INCREMENT pour la table `commissaire`
+-- AUTO_INCREMENT for table `commissaire`
 --
 ALTER TABLE `commissaire`
   MODIFY `id_commissaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT pour la table `concurrent`
+-- AUTO_INCREMENT for table `concurrent`
 --
 ALTER TABLE `concurrent`
   MODIFY `id_concurrent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT pour la table `personne`
+-- AUTO_INCREMENT for table `personne`
 --
 ALTER TABLE `personne`
   MODIFY `id_personne` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT pour la table `proprietaire`
+-- AUTO_INCREMENT for table `proprietaire`
 --
 ALTER TABLE `proprietaire`
   MODIFY `id_proprietaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
--- AUTO_INCREMENT pour la table `regate`
+-- AUTO_INCREMENT for table `regate`
 --
 ALTER TABLE `regate`
   MODIFY `id_regate` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
--- AUTO_INCREMENT pour la table `serie`
+-- AUTO_INCREMENT for table `serie`
 --
 ALTER TABLE `serie`
   MODIFY `id_serie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT pour la table `skipper`
+-- AUTO_INCREMENT for table `skipper`
 --
 ALTER TABLE `skipper`
   MODIFY `id_skipper` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT pour la table `voilier`
+-- AUTO_INCREMENT for table `voilier`
 --
 ALTER TABLE `voilier`
   MODIFY `id_voilier` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `classe`
+-- Constraints for table `classe`
 --
 ALTER TABLE `classe`
   ADD CONSTRAINT `Classe_ibfk_1` FOREIGN KEY (`id_serie`) REFERENCES `serie` (`id_serie`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `commissaire`
+-- Constraints for table `commissaire`
 --
 ALTER TABLE `commissaire`
   ADD CONSTRAINT `FK_Commissaire_id_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`);
 
 --
--- Contraintes pour la table `concurrent`
+-- Constraints for table `concurrent`
 --
 ALTER TABLE `concurrent`
   ADD CONSTRAINT `FK_Concurrent_id_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`),
   ADD CONSTRAINT `FK_Concurrent_id_voilier` FOREIGN KEY (`id_voilier`) REFERENCES `voilier` (`id_voilier`);
 
 --
--- Contraintes pour la table `participer`
+-- Constraints for table `participer`
 --
 ALTER TABLE `participer`
   ADD CONSTRAINT `FK_PARTICIPER_id_regate` FOREIGN KEY (`id_regate`) REFERENCES `regate` (`id_regate`),
   ADD CONSTRAINT `FK_PARTICIPER_id_voilier` FOREIGN KEY (`id_voilier`) REFERENCES `voilier` (`id_voilier`);
 
 --
--- Contraintes pour la table `proprietaire`
+-- Constraints for table `proprietaire`
 --
 ALTER TABLE `proprietaire`
   ADD CONSTRAINT `FK_Proprietaire_id_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`);
 
 --
--- Contraintes pour la table `regate`
+-- Constraints for table `regate`
 --
 ALTER TABLE `regate`
   ADD CONSTRAINT `FK_Regate_id_challenge` FOREIGN KEY (`id_challenge`) REFERENCES `challenge` (`id_challenge`),
   ADD CONSTRAINT `FK_Regate_id_commissaire` FOREIGN KEY (`id_commissaire`) REFERENCES `commissaire` (`id_commissaire`);
 
 --
--- Contraintes pour la table `skipper`
+-- Constraints for table `skipper`
 --
 ALTER TABLE `skipper`
   ADD CONSTRAINT `FK_Skipper_id_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`),
   ADD CONSTRAINT `FK_Skipper_id_voilier` FOREIGN KEY (`id_voilier`) REFERENCES `voilier` (`id_voilier`);
 
 --
--- Contraintes pour la table `voilier`
+-- Constraints for table `voilier`
 --
 ALTER TABLE `voilier`
   ADD CONSTRAINT `FK_Voilier_id_proprietaire` FOREIGN KEY (`id_proprietaire`) REFERENCES `proprietaire` (`id_proprietaire`),
